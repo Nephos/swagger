@@ -35,17 +35,17 @@ builder = Swagger::Builder.new(
 )
 
 builder.add(Swagger::Controller.new("Users", "User resources", [
-  Swagger::Action.new("get", "/users", "All users"),
+  Swagger::Action.new("get", "/users", "All users", authorization: true),
   Swagger::Action.new("get", "/users/{id}", "Get user by id", parameters: [
     Swagger::Parameter.new("id", "path")
   ], responses: [
     Swagger::Response.new("200", "Success response"),
     Swagger::Response.new("404", "Not found user")
-  ]),
+  ], authorization: true),
   Swagger::Action.new("post", "/users", "Create User", responses: [
     Swagger::Response.new("201", "Return user resource after created"),
     Swagger::Response.new("401", "Unauthorizated")
-  ])
+  ], authorization: false)
 ]))
 
 document = builder.built
